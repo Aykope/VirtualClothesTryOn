@@ -161,7 +161,7 @@ def main():
         print(select)
 
         if select != None:
-            if select != previous_selection and select :
+            if select != previous_selection:
                 previous_selection = select
                 select_time0 = current_time
             elif select_time0 != None:
