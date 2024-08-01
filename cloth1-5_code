@@ -1,90 +1,91 @@
+import os
 import cv2
 import mediapipe as mp
 import numpy as np
 
-# 衣物和配件的函数
+# Functions for clothes and accessories
 def cloth_1(landmarks):
-    im_path = r"C:\Users\Administrator\OneDrive\Desktop\TESP\white_cloth\cloth1\cloth1.png"
-    threshold = [(200), (255)]
+    im_path = os.path.join(os.path.dirname(__file__), 'white_cloth', 'cloth1', 'cloth1.png')
+    threshold = [200, 255]
     key_points = [
-        (239, 91),  # 左肩
-        (564, 91),  # 右肩
-        (309, 344),  # 左髋部
-        (500, 344)  # 右髋部
+        (239, 91),  # Left shoulder
+        (564, 91),  # Right shoulder
+        (309, 344),  # Left hip
+        (500, 344)  # Right hip
     ]
     dst_points = np.array([
-        (landmarks[12][0], landmarks[12][1]),  # 左肩
-        (landmarks[11][0], landmarks[11][1]),  # 右肩
-        (landmarks[24][0], landmarks[24][1]),  # 左髋部
-        (landmarks[23][0], landmarks[23][1])  # 右髋部
+        (landmarks[12][0], landmarks[12][1]),  # Left shoulder
+        (landmarks[11][0], landmarks[11][1]),  # Right shoulder
+        (landmarks[24][0], landmarks[24][1]),  # Left hip
+        (landmarks[23][0], landmarks[23][1])   # Right hip
     ], dtype=np.float32)
     return im_path, threshold, key_points, dst_points
 
 def cloth_2(landmarks):
-    im_path = r"C:\Users\Administrator\OneDrive\Desktop\TESP\white_cloth\cloth2\cloth2.bmp"
-    threshold = [(200), (255)]
+    im_path = os.path.join(os.path.dirname(__file__), 'white_cloth', 'cloth2', 'cloth2.bmp')
+    threshold = [200, 255]
     key_points = [
-        (258, 109),  # 左肩
-        (702, 109),  # 右肩
-        (300, 803),  # 左髋部
-        (600, 803)  # 右髋部
+        (258, 109),  # Left shoulder
+        (702, 109),  # Right shoulder
+        (300, 803),  # Left hip
+        (600, 803)   # Right hip
     ]
     dst_points = np.array([
-        (landmarks[12][0], landmarks[12][1]),  # 左肩
-        (landmarks[11][0], landmarks[11][1]),  # 右肩
-        (landmarks[24][0], landmarks[24][1]),  # 左髋部
-        (landmarks[23][0], landmarks[23][1])  # 右髋部
+        (landmarks[12][0], landmarks[12][1]),  # Left shoulder
+        (landmarks[11][0], landmarks[11][1]),  # Right shoulder
+        (landmarks[24][0], landmarks[24][1]),  # Left hip
+        (landmarks[23][0], landmarks[23][1])   # Right hip
     ], dtype=np.float32)
     return im_path, threshold, key_points, dst_points
 
 def cloth_3(landmarks):
-    im_path = r"C:\Users\Administrator\OneDrive\Desktop\TESP\white_cloth\cloth3\cloth3.jpg"
-    threshold = [(200), (255)]
+    im_path = os.path.join(os.path.dirname(__file__), 'white_cloth', 'cloth3', 'cloth3.jpg')
+    threshold = [200, 255]
     key_points = [
-        (278, 158),  # 左肩
-        (732, 157),  # 右肩
-        (349, 680),  # 左髋部
-        (650, 680)  # 右髋部
+        (278, 158),  # Left shoulder
+        (732, 157),  # Right shoulder
+        (349, 680),  # Left hip
+        (650, 680)   # Right hip
     ]
     dst_points = np.array([
-        (landmarks[12][0], landmarks[12][1]),  # 左肩
-        (landmarks[11][0], landmarks[11][1]),  # 右肩
-        (landmarks[24][0], landmarks[24][1]),  # 左髋部
-        (landmarks[23][0], landmarks[23][1])  # 右髋部
+        (landmarks[12][0], landmarks[12][1]),  # Left shoulder
+        (landmarks[11][0], landmarks[11][1]),  # Right shoulder
+        (landmarks[24][0], landmarks[24][1]),  # Left hip
+        (landmarks[23][0], landmarks[23][1])   # Right hip
     ], dtype=np.float32)
     return im_path, threshold, key_points, dst_points
 
 def cloth_4(landmarks):
-    im_path = r"C:\Users\Administrator\OneDrive\Desktop\TESP\white_cloth\cloth4\cloth4.jpg"
-    threshold = [(200), (255)]
+    im_path = os.path.join(os.path.dirname(__file__), 'white_cloth', 'cloth4', 'cloth4.jpg')
+    threshold = [200, 255]
     key_points = [
-        (388, 488),  # 左肩
-        (895, 487),  # 右肩
-        (471, 1200),  # 左髋部
-        (808, 1200)  # 右髋部
+        (388, 488),  # Left shoulder
+        (895, 487),  # Right shoulder
+        (471, 1200),  # Left hip
+        (808, 1200)   # Right hip
     ]
     dst_points = np.array([
-        (landmarks[12][0], landmarks[12][1]),  # 左肩
-        (landmarks[11][0], landmarks[11][1]),  # 右肩
-        (landmarks[24][0], landmarks[24][1]),  # 左髋部
-        (landmarks[23][0], landmarks[23][1])  # 右髋部
+        (landmarks[12][0], landmarks[12][1]),  # Left shoulder
+        (landmarks[11][0], landmarks[11][1]),  # Right shoulder
+        (landmarks[24][0], landmarks[24][1]),  # Left hip
+        (landmarks[23][0], landmarks[23][1])   # Right hip
     ], dtype=np.float32)
     return im_path, threshold, key_points, dst_points
 
 def cloth_5(landmarks):
-    im_path = r"C:\Users\Administrator\OneDrive\Desktop\TESP\white_cloth\cloth5\cloth5.jpg"
-    threshold = [(200), (255)]
+    im_path = os.path.join(os.path.dirname(__file__), 'white_cloth', 'cloth5', 'cloth5.jpg')
+    threshold = [200, 255]
     key_points = [
-        (130, 74),  # 左肩
-        (380, 74),  # 右肩
-        (142, 474),  # 左髋部
-        (367, 474)  # 右髋部
+        (130, 74),   # Left shoulder
+        (380, 74),   # Right shoulder
+        (142, 474),  # Left hip
+        (367, 474)   # Right hip
     ]
     dst_points = np.array([
-        (landmarks[12][0], landmarks[12][1]),  # 左肩
-        (landmarks[11][0], landmarks[11][1]),  # 右肩
-        (landmarks[24][0], landmarks[24][1]),  # 左髋部
-        (landmarks[23][0], landmarks[23][1])  # 右髋部
+        (landmarks[12][0], landmarks[12][1]),  # Left shoulder
+        (landmarks[11][0], landmarks[11][1]),  # Right shoulder
+        (landmarks[24][0], landmarks[24][1]),  # Left hip
+        (landmarks[23][0], landmarks[23][1])   # Right hip
     ], dtype=np.float32)
     return im_path, threshold, key_points, dst_points
 
@@ -102,6 +103,7 @@ def load_item_data(item_function, landmarks):
     item_extracted = cv2.bitwise_and(item_img, mask)
     return item_extracted, key_points, dst_points
 
+# Get pose landmarks
 def get_pose_landmarks(frame):
     frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     result = pose.process(frame_rgb)
@@ -118,16 +120,16 @@ def warp_item(item_img, src_points, dst_points, frame):
     warped_item = cv2.warpPerspective(item_img, matrix, (frame.shape[1], frame.shape[0]))
     return warped_item
 
-# 初始化 Mediapipe Pose
+# Initialize Mediapipe Pose
 mp_pose = mp.solutions.pose
 pose = mp_pose.Pose()
 
-# 打开摄像头
+# Open the camera
 cap = cv2.VideoCapture(0)
 
-# 选择要显示的衣物
+# Select the item to display
 # 1: cloth_1, 2: cloth_2, 3: cloth_3, 4: cloth_4, 5: cloth_5
-selected_cloth = 2  # 选择衣物
+selected_cloth = 2  # Select cloth
 
 while cap.isOpened():
     ret, frame = cap.read()
