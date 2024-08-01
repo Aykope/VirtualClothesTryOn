@@ -1,44 +1,45 @@
+import os
 import cv2
 import mediapipe as mp
 import numpy as np
 from cv2 import aruco
 
 def black_hat(landmarks):
-    im_path = 'black_hat.png'
+    im_path = os.path.join(os.path.dirname(__file__), 'black_hat.png')
     threshold = [200, 255]
     key_points = [
-        (125, 487),  # 左下
-        (546, 487),  # 右下
-        (128, 123),  # 左上
-        (583, 120)  # 右上
+        (125, 487),  # Bottom left
+        (546, 487),  # Bottom right
+        (128, 123),  # Top left
+        (583, 120)   # Top right
     ]
     dst_points = [
-        (landmarks[54][0], landmarks[54][1] - 10),  # 左
-        (landmarks[284][0], landmarks[284][1] - 10),  # 右
-        (landmarks[103][0], landmarks[103][1] - 120),  # 下
-        (landmarks[332][0], landmarks[332][1] - 120)  # 上
+        (landmarks[54][0], landmarks[54][1] - 10),  # Left
+        (landmarks[284][0], landmarks[284][1] - 10),  # Right
+        (landmarks[103][0], landmarks[103][1] - 120),  # Bottom
+        (landmarks[332][0], landmarks[332][1] - 120)  # Top
     ]
     return im_path, threshold, key_points, dst_points
 
 def pink_hat(landmarks):
-    im_path = 'hat_pink.png'
+    im_path = os.path.join(os.path.dirname(__file__), 'hat_pink.png')
     threshold = [225, 255]
     key_points = [
-        (138, 535),  # 左下
-        (568, 535),  # 右下
-        (207, 279),  # 左上
-        (536, 279)  # 右上
+        (138, 535),  # Bottom left
+        (568, 535),  # Bottom right
+        (207, 279),  # Top left
+        (536, 279)   # Top right
     ]
     dst_points = [
-        (landmarks[54][0], landmarks[54][1] - 30),  # 左
-        (landmarks[284][0], landmarks[284][1] - 30),  # 右
-        (landmarks[103][0], landmarks[103][1] - 120),  # 下
-        (landmarks[332][0], landmarks[332][1] - 120)  # 上
+        (landmarks[54][0], landmarks[54][1] - 30),  # Left
+        (landmarks[284][0], landmarks[284][1] - 30),  # Right
+        (landmarks[103][0], landmarks[103][1] - 120),  # Bottom
+        (landmarks[332][0], landmarks[332][1] - 120)  # Top
     ]
     return im_path, threshold, key_points, dst_points
 
 def sunglass_1(landmarks):
-    im_path = 'sunglass.png'
+    im_path = os.path.join(os.path.dirname(__file__), 'sunglass.png')
     threshold = [150, 255]
     key_points = [
         (400, 908),
@@ -47,27 +48,27 @@ def sunglass_1(landmarks):
         (900, 998)
     ]
     dst_points = [
-        (landmarks[124][0], landmarks[124][1]),  # 左上
-        (landmarks[353][0], landmarks[353][1]),  # 右上
-        (landmarks[117][0], landmarks[117][1]),  # 左下
-        (landmarks[346][0], landmarks[346][1])  # 右下
+        (landmarks[124][0], landmarks[124][1]),  # Top left
+        (landmarks[353][0], landmarks[353][1]),  # Top right
+        (landmarks[117][0], landmarks[117][1]),  # Bottom left
+        (landmarks[346][0], landmarks[346][1])   # Bottom right
     ]
     return im_path, threshold, key_points, dst_points
 
 def sunglass_2(landmarks):
-    im_path = 'SUNGLASSES_2.jpg'
+    im_path = os.path.join(os.path.dirname(__file__), 'SUNGLASSES_2.jpg')
     threshold = [225, 255]
     key_points = [
         (120, 110),
-        (592 - 120, 110),
+        (472, 110),  # 592 - 120
         (120, 180),
-        (592 - 120, 180)
+        (472, 180)   # 592 - 120
     ]
     dst_points = [
-        (landmarks[124][0], landmarks[124][1]),  # 左上
-        (landmarks[353][0], landmarks[353][1]),  # 右上
-        (landmarks[117][0], landmarks[117][1]),  # 左下
-        (landmarks[346][0], landmarks[346][1])  # 右下
+        (landmarks[124][0], landmarks[124][1]),  # Top left
+        (landmarks[353][0], landmarks[353][1]),  # Top right
+        (landmarks[117][0], landmarks[117][1]),  # Bottom left
+        (landmarks[346][0], landmarks[346][1])   # Bottom right
     ]
     return im_path, threshold, key_points, dst_points
 
@@ -82,7 +83,7 @@ def load_item_data(item_function, landmarks):
     item_extracted = cv2.bitwise_and(item_img, mask)
     return item_extracted, key_points, dst_points
 
-# 获取人脸特征点
+# Get face landmarks
 def get_face_landmarks(frame):
     frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     result = face_mesh.process(frame_rgb)
@@ -117,7 +118,7 @@ def read_aruco_marker(image, dictionary):
         return id
     return id
 
-# 初始化Mediapipe Face Mesh
+# Initialize MediaPipe Face Mesh
 mp_face_mesh = mp.solutions.face_mesh
 face_mesh = mp_face_mesh.FaceMesh()
 mp_drawing = mp.solutions.drawing_utils
@@ -125,12 +126,12 @@ mp_drawing = mp.solutions.drawing_utils
 # Load Aruco Dictionary
 dictionary = aruco.getPredefinedDictionary(aruco.DICT_4X4_50)
 
-# 打开摄像头
+# Open camera
 cap = cv2.VideoCapture(0)
 
-# 选择要显示的物件
-selected_hat = 0  # 选择粉帽子
-selected_glasses = 0  # 选择墨镜2
+# Choose the item to display
+selected_hat = 0  # Select pink hat
+selected_glasses = 0  # Select sunglasses 2
 display_hat = False  # Flag to determine if hat should be displayed
 display_glasses = False  # Flag to determine if glasses should be displayed
 
