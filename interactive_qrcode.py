@@ -77,9 +77,9 @@ def dead_pool(landmarks):
     threshold = [225, 255]
     key_points = [
         (155, 250),
-        (317, 250),  
+        (317, 250),
         (188, 435),
-        (284, 435)   
+        (284, 435)
     ]
     dst_points = [
         (landmarks[130][0], landmarks[130][1]),  # Top left
@@ -145,6 +145,10 @@ dictionary = aruco.getPredefinedDictionary(aruco.DICT_4X4_50)
 
 # Open camera
 cap = cv2.VideoCapture(0)
+
+cv2.namedWindow('Virtual Clothes and Sunglasses Fitting', cv2.WINDOW_NORMAL)
+cv2.setWindowProperty('Virtual Clothes and Sunglasses Fitting', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+
 
 # Choose the item to display
 selected_hat = 0  # Select pink hat
