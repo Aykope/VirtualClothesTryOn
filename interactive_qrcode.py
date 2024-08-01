@@ -72,6 +72,23 @@ def sunglass_2(landmarks):
     ]
     return im_path, threshold, key_points, dst_points
 
+def dead_pool(landmarks):
+    im_path = os.path.join(os.path.dirname(__file__), 'deadpool_head.jpg')
+    threshold = [225, 255]
+    key_points = [
+        (155, 250),
+        (317, 250),  
+        (188, 435),
+        (284, 435)   
+    ]
+    dst_points = [
+        (landmarks[130][0], landmarks[130][1]),  # Top left
+        (landmarks[359][0], landmarks[359][1]),  # Top right
+        (landmarks[43][0], landmarks[43][1]),  # Bottom left
+        (landmarks[273][0], landmarks[273][1])   # Bottom right
+    ]
+    return im_path, threshold, key_points, dst_points
+
 def load_item_data(item_function, landmarks):
     im_path, threshold, key_points, dst_points = item_function(landmarks)
     item_img = cv2.imread(im_path)
@@ -134,6 +151,8 @@ selected_hat = 0  # Select pink hat
 selected_glasses = 0  # Select sunglasses 2
 display_hat = False  # Flag to determine if hat should be displayed
 display_glasses = False  # Flag to determine if glasses should be displayed
+selected_mask = 0  # Select mask
+display_mask = False  # Flag to determine if mask should be displayed
 
 while cap.isOpened():
     ret, frame = cap.read()
@@ -148,8 +167,10 @@ while cap.isOpened():
     if 5 in aruco_reading:
         display_hat = False
         display_glasses = False
+        display_mask = False
         selected_hat = 0
         selected_glasses = 0
+        selected_mask = 0
     else:
         for i in range(aruco_reading.size):
             if aruco_reading[i] == 1 or aruco_reading[i] == 2:
@@ -158,6 +179,9 @@ while cap.isOpened():
             elif aruco_reading[i] == 3 or aruco_reading[i] == 4:
                 selected_glasses = aruco_reading[i]
                 display_glasses = True
+            elif aruco_reading[i] == 6:
+                selected_mask = aruco_reading[i]
+                display_mask = True
 
     if landmarks:
         if display_hat:
@@ -178,6 +202,13 @@ while cap.isOpened():
                 item_img, src_points, dst_points = load_item_data(sunglass_2, landmarks)
 
             if selected_glasses in [3, 4]:
+                warped_item = warp_item(item_img, src_points, dst_points, frame)
+                mask = np.any(warped_item != 0, axis=-1)
+                frame[mask] = warped_item[mask]
+
+        if display_mask:
+            if selected_mask == 6:
+                item_img, src_points, dst_points = load_item_data(dead_pool, landmarks)
                 warped_item = warp_item(item_img, src_points, dst_points, frame)
                 mask = np.any(warped_item != 0, axis=-1)
                 frame[mask] = warped_item[mask]
