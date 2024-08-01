@@ -21,6 +21,9 @@ This project enables virtual try-on of hats and sunglasses using computer vision
    ```bash
    git clone https://github.com/yourusername/virtual-clothes-try-on.git
    cd virtual-clothes-try-on
-2. **Install the required packages
+2. **Install the required packages**
    ```bash
    pip install opencv-python mediapipe numpy
+
+## Future Collaboration
+Please contact us if you wish to collaborate on this project:)
