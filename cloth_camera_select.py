@@ -41,6 +41,8 @@ def main():
 
     cv2.namedWindow('camera preview')
 
+    successful, image = cap.read()
+
     # rect_pos_ref = np.concatenate((rect_pos.transpose(),np.array([[1,1,1,1]])),axis = 0)
 
     rect_pos_ref = [[int(image.shape[1]/2)],[int(image.shape[0]/2)],[1]]
