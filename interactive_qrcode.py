@@ -199,6 +199,7 @@ while cap.isOpened():
                 mask = np.any(warped_item != 0, axis=-1)
                 frame[mask] = warped_item[mask]
 
+
         if display_glasses:
             if selected_glasses == 3:
                 item_img, src_points, dst_points = load_item_data(sunglass_1, landmarks)
@@ -216,6 +217,27 @@ while cap.isOpened():
                 warped_item = warp_item(item_img, src_points, dst_points, frame)
                 mask = np.any(warped_item != 0, axis=-1)
                 frame[mask] = warped_item[mask]
+            if display_glasses:
+                if selected_glasses == 3:
+                    item_img, src_points, dst_points = load_item_data(sunglass_1, landmarks)
+                elif selected_glasses == 4:
+                    item_img, src_points, dst_points = load_item_data(sunglass_2, landmarks)
+
+                if selected_glasses in [3, 4]:
+                    warped_item = warp_item(item_img, src_points, dst_points, frame)
+                    mask = np.any(warped_item != 0, axis=-1)
+                    frame[mask] = warped_item[mask]
+
+            if display_hat:
+                if selected_hat == 1:
+                    item_img, src_points, dst_points = load_item_data(black_hat, landmarks)
+                elif selected_hat == 2:
+                    item_img, src_points, dst_points = load_item_data(pink_hat, landmarks)
+
+                if selected_hat in [1, 2]:
+                    warped_item = warp_item(item_img, src_points, dst_points, frame)
+                    mask = np.any(warped_item != 0, axis=-1)
+                    frame[mask] = warped_item[mask]
 
     cv2.imshow('Virtual Clothes and Sunglasses Fitting', frame)
     if cv2.waitKey(10) & 0xFF == ord('q'):
